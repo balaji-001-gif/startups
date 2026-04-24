@@ -7,7 +7,7 @@ frappe.pages['startup-os-reports'].on_load = function(wrapper) {
 
 	page.set_indicator('Ready', 'green');
 
-	$(wrapper).find('.page-content').html(`
+	$(page.body).css('padding', '20px').html(`
 		<div class="sos-reports-container">
 			<div class="sos-company-bar">
 				<label class="sos-label">Company</label>
@@ -105,7 +105,7 @@ frappe.pages['startup-os-reports'].on_load = function(wrapper) {
 	});
 
 	// Report button clicks
-	$(wrapper).on('click', '.sos-btn', function() {
+	$(page.body).on('click', '.sos-btn', function() {
 		var $btn = $(this);
 		var report = $btn.data('report');
 		var label = $btn.data('label');
