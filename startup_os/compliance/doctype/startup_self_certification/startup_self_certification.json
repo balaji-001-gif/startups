@@ -1,0 +1,155 @@
+{
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "doctype": "DocType",
+ "module": "Compliance",
+ "name": "Startup Self Certification",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "company",
+  "date",
+  "status",
+  "section_labour",
+  "labour_intro",
+  "factories_act",
+  "contract_labour_act",
+  "payment_of_bonus_act",
+  "pf_misc_act",
+  "payment_of_gratuity_act",
+  "building_and_other_construction",
+  "section_environment",
+  "environment_intro",
+  "water_pollution_act",
+  "air_pollution_act",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "SCERT-.YYYY.-",
+   "print_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "default": "Today"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nCertified\nSubmitted to DPIIT"
+  },
+  {
+   "fieldname": "section_labour",
+   "fieldtype": "Section Break",
+   "label": "Labour Law Self-Certifications"
+  },
+  {
+   "fieldname": "labour_intro",
+   "fieldtype": "HTML",
+   "options": "<p style='color:#555;font-size:11px;'>Under the Startup India initiative, DPIIT-recognized startups may self-certify compliance with these 6 labour laws for 5 years from incorporation.</p>"
+  },
+  {
+   "fieldname": "factories_act",
+   "fieldtype": "Check",
+   "label": "The Factories Act, 1948"
+  },
+  {
+   "fieldname": "contract_labour_act",
+   "fieldtype": "Check",
+   "label": "The Contract Labour (Regulation & Abolition) Act, 1970"
+  },
+  {
+   "fieldname": "payment_of_bonus_act",
+   "fieldtype": "Check",
+   "label": "The Payment of Bonus Act, 1965"
+  },
+  {
+   "fieldname": "pf_misc_act",
+   "fieldtype": "Check",
+   "label": "The Employees PF & MP Act, 1952"
+  },
+  {
+   "fieldname": "payment_of_gratuity_act",
+   "fieldtype": "Check",
+   "label": "The Payment of Gratuity Act, 1972"
+  },
+  {
+   "fieldname": "building_and_other_construction",
+   "fieldtype": "Check",
+   "label": "BOCW Act, 1996 (if construction activity)"
+  },
+  {
+   "fieldname": "section_environment",
+   "fieldtype": "Section Break",
+   "label": "Environment Law Self-Certifications"
+  },
+  {
+   "fieldname": "environment_intro",
+   "fieldtype": "HTML",
+   "options": "<p style='color:#555;font-size:11px;'>Startups may self-certify under 3 environment laws for 3 years from incorporation.</p>"
+  },
+  {
+   "fieldname": "water_pollution_act",
+   "fieldtype": "Check",
+   "label": "The Water (Prevention & Control of Pollution) Act, 1974"
+  },
+  {
+   "fieldname": "air_pollution_act",
+   "fieldtype": "Check",
+   "label": "The Air (Prevention & Control of Pollution) Act, 1981"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes / Remarks"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "Startup Legal",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Startup Founder",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Startup Admin",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ],
+ "creation": "2024-04-24 12:00:00.000000",
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator"
+}

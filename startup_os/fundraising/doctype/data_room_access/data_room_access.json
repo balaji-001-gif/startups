@@ -1,0 +1,72 @@
+{
+ "doctype": "DocType",
+ "istable": 1,
+ "module": "Fundraising",
+ "name": "Data Room Access",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "investor",
+  "contact_name",
+  "email",
+  "col1",
+  "is_active",
+  "access_token",
+  "token_expires",
+  "last_accessed"
+ ],
+ "fields": [
+  {
+   "fieldname": "investor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Investor",
+   "options": "Investor"
+  },
+  {
+   "fieldname": "contact_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Contact Name"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "col1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Active"
+  },
+  {
+   "fieldname": "access_token",
+   "fieldtype": "Data",
+   "label": "Access Token",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "token_expires",
+   "fieldtype": "Datetime",
+   "label": "Token Expires"
+  },
+  {
+   "fieldname": "last_accessed",
+   "fieldtype": "Datetime",
+   "label": "Last Accessed",
+   "read_only": 1
+  }
+ ],
+ "creation": "2024-04-24 12:00:00.000000",
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator"
+}

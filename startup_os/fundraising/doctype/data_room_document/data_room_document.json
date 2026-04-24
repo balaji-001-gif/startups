@@ -1,0 +1,59 @@
+{
+ "doctype": "DocType",
+ "istable": 1,
+ "module": "Fundraising",
+ "name": "Data Room Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "document_name",
+  "category",
+  "file",
+  "description",
+  "added_on",
+  "view_count"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "fieldname": "document_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Document Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Category",
+   "options": "Financial\nLegal\nProduct\nTeam\nIP\nOther"
+  },
+  {
+   "fieldname": "file",
+   "fieldtype": "Attach",
+   "label": "File"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "added_on",
+   "fieldtype": "Date",
+   "label": "Added On",
+   "default": "Today"
+  },
+  {
+   "fieldname": "view_count",
+   "fieldtype": "Int",
+   "label": "Views",
+   "read_only": 1
+  }
+ ],
+ "creation": "2024-04-24 12:00:00.000000",
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator"
+}

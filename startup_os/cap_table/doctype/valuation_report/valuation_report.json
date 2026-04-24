@@ -1,0 +1,185 @@
+{
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "doctype": "DocType",
+ "module": "Cap Table",
+ "name": "Valuation Report",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "company",
+  "valuation_date",
+  "col1",
+  "valuer_name",
+  "valuer_registration",
+  "col2",
+  "method",
+  "status",
+  "section_values",
+  "pre_money_valuation",
+  "per_share_value",
+  "shares_outstanding",
+  "col3",
+  "post_money_valuation",
+  "col4",
+  "report_file",
+  "notes",
+  "section_linked",
+  "linked_equity_transaction",
+  "linked_fema_tracker"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "VALRPT-.YYYY.-",
+   "print_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "valuation_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Valuation Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "valuer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Registered Valuer Name"
+  },
+  {
+   "fieldname": "valuer_registration",
+   "fieldtype": "Data",
+   "label": "Valuer Registration No. (IBBI)"
+  },
+  {
+   "fieldname": "col2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "method",
+   "fieldtype": "Select",
+   "label": "Valuation Method",
+   "options": "DCF (Discounted Cash Flow)\nNet Asset Value (NAV)\nComparable Company\nVC Method\nOther"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending\nIssued\nAccepted by RBI"
+  },
+  {
+   "fieldname": "section_values",
+   "fieldtype": "Section Break",
+   "label": "Valuation Numbers"
+  },
+  {
+   "fieldname": "pre_money_valuation",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Pre-Money Valuation (\u20b9)"
+  },
+  {
+   "fieldname": "per_share_value",
+   "fieldtype": "Currency",
+   "label": "Value Per Share (\u20b9)"
+  },
+  {
+   "fieldname": "shares_outstanding",
+   "fieldtype": "Int",
+   "label": "Shares Outstanding"
+  },
+  {
+   "fieldname": "col3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "post_money_valuation",
+   "fieldtype": "Currency",
+   "label": "Post-Money Valuation (\u20b9)"
+  },
+  {
+   "fieldname": "col4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "report_file",
+   "fieldtype": "Attach",
+   "label": "Valuation Report (PDF)"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "section_linked",
+   "fieldtype": "Section Break",
+   "label": "Linked Documents"
+  },
+  {
+   "fieldname": "linked_equity_transaction",
+   "fieldtype": "Link",
+   "label": "Linked Equity Transaction",
+   "options": "Equity Transaction"
+  },
+  {
+   "fieldname": "linked_fema_tracker",
+   "fieldtype": "Link",
+   "label": "Linked FEMA/FDI Tracker",
+   "options": "FEMA FDI Tracker"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "Startup CFO",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Startup Legal",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Startup Admin",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Startup Founder",
+   "permlevel": 0,
+   "read": 1
+  }
+ ],
+ "title_field": "company",
+ "creation": "2024-04-24 12:00:00.000000",
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator"
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.8;padding:50px 70px;color:#1a1a1a;}
+  .header{text-align:center;margin-bottom:30px;}
+  .header h1{font-size:16pt;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
+  .header .sub{font-size:11pt;color:#555;}
+  .confidential{text-align:center;font-weight:bold;color:#DC2626;font-size:10pt;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
+  .date-line{text-align:right;margin-bottom:20px;}
+  .to-block{margin-bottom:20px;}
+  h2{font-size:12pt;text-decoration:underline;margin:20px 0 8px;}
+  table{width:100%;border-collapse:collapse;margin:16px 0;}
+  table th{background:#1E3A5F;color:#fff;text-align:left;padding:8px 12px;font-size:10pt;}
+  table td{padding:8px 12px;border-bottom:1px solid #e0e0e0;}
+  table tr:nth-child(even){background:#f9f9f9;}
+  .signature-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:60px;}
+  .sig-block .line{border-top:1px solid #000;margin-top:40px;padding-top:6px;font-size:10pt;color:#444;}
+  .footer{margin-top:40px;font-size:9pt;color:#888;border-top:1px solid #ccc;padding-top:10px;}
+</style>
+</head>
+<body>
+<div class="confidential">Private & Confidential</div>
+
+<div class="header">
+  <h1>{{ company_name }}</h1>
+  <div class="sub">Employee Stock Option Grant Letter</div>
+</div>
+
+<div class="date-line">Date: {{ grant_date }}</div>
+
+<div class="to-block">
+  <strong>To,</strong><br>
+  {{ employee_name }}<br>
+  {{ employee_designation }}<br>
+  {{ company_name }}
+</div>
+
+<p>Dear <strong>{{ employee_name }}</strong>,</p>
+
+<p>We are pleased to inform you that the Board of Directors of <strong>{{ company_name }}</strong> has approved the grant of Stock Options to you under the <strong>{{ company_name }} Employee Stock Option Plan (ESOP)</strong>, subject to the terms and conditions set forth herein.</p>
+
+<h2>Grant Details</h2>
+<table>
+  <tr><th>Parameter</th><th>Details</th></tr>
+  <tr><td>Number of Options Granted</td><td><strong>{{ options_count }}</strong> options</td></tr>
+  <tr><td>Grant Date</td><td>{{ grant_date }}</td></tr>
+  <tr><td>Vesting Start Date</td><td>{{ vesting_start }}</td></tr>
+  <tr><td>Cliff Period</td><td>{{ cliff_months }} months</td></tr>
+  <tr><td>Total Vesting Period</td><td>{{ vesting_months }} months</td></tr>
+  <tr><td>Exercise Price</td><td>₹{{ exercise_price }} per share</td></tr>
+  <tr><td>Share Class on Exercise</td><td>Equity Shares of Face Value ₹10 each</td></tr>
+</table>
+
+<h2>Vesting Schedule</h2>
+<p>Your options will vest as follows:</p>
+<ul>
+  <li><strong>Cliff (Month {{ cliff_months }}):</strong> 25% of total options ({{ options_count|int // 4 }} options) vest on the Cliff Date.</li>
+  <li><strong>Monthly vesting (Month {{ cliff_months }} to {{ vesting_months }}):</strong> The remaining 75% vest equally each month over the remaining {{ vesting_months - cliff_months }} months.</li>
+</ul>
+
+<h2>Exercise Window</h2>
+<p>After vesting, you may exercise your options within <strong>90 days</strong> of cessation of employment, or as extended by the Board at its discretion. All unvested options shall lapse upon resignation or termination for cause.</p>
+
+<h2>Terms & Conditions</h2>
+<ol>
+  <li>These options are non-transferable and non-assignable.</li>
+  <li>Options lapse if not exercised within the exercise window.</li>
+  <li>The Company reserves the right to amend the ESOP Plan in accordance with applicable law.</li>
+  <li>SEBI (SBEB & SE) Regulations 2021 and the Companies Act 2013 shall govern this grant.</li>
+  <li>Tax implications of option exercise are solely the responsibility of the optionee.</li>
+</ol>
+
+<p>Please sign and return a copy of this letter as your acceptance of the grant within 15 days.</p>
+
+<div class="signature-grid">
+  <div class="sig-block">
+    <div class="line">
+      <strong>For {{ company_name }}</strong><br>
+      Authorized Signatory<br>
+      Director / CEO
+    </div>
+  </div>
+  <div class="sig-block">
+    <div class="line">
+      <strong>Accepted by Grantee</strong><br>
+      {{ employee_name }}<br>
+      Date: _______________
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  {{ company_name }} | ESOP Grant Letter | {{ grant_date }} | Confidential
+</div>
+</body>
+</html>

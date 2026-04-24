@@ -1,0 +1,196 @@
+{
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "doctype": "DocType",
+ "module": "Governance",
+ "name": "Company Director",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "director_name",
+  "company",
+  "col1",
+  "din",
+  "status",
+  "col2",
+  "email",
+  "mobile",
+  "section_appointment",
+  "appointment_date",
+  "cessation_date",
+  "designation",
+  "col3",
+  "director_type",
+  "nationality",
+  "section_consent",
+  "dir_2_signed",
+  "dir_8_signed",
+  "mbp_1_signed",
+  "section_address",
+  "address",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "DIR-.YYYY.-",
+   "print_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "director_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Director Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "din",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "DIN (Director Identification Number)"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Active\nCeased\nResigned\nDisqualified"
+  },
+  {
+   "fieldname": "col2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "mobile",
+   "fieldtype": "Data",
+   "label": "Mobile"
+  },
+  {
+   "fieldname": "section_appointment",
+   "fieldtype": "Section Break",
+   "label": "Appointment Details"
+  },
+  {
+   "fieldname": "appointment_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date of Appointment"
+  },
+  {
+   "fieldname": "cessation_date",
+   "fieldtype": "Date",
+   "label": "Date of Cessation",
+   "depends_on": "eval:doc.status!='Active'"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Select",
+   "label": "Designation",
+   "options": "Managing Director\nWhole Time Director\nIndependent Director\nNominee Director\nAdditional Director\nOther"
+  },
+  {
+   "fieldname": "col3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "director_type",
+   "fieldtype": "Select",
+   "label": "Director Type",
+   "options": "Executive\nNon-Executive\nIndependent\nNominee"
+  },
+  {
+   "fieldname": "nationality",
+   "fieldtype": "Select",
+   "label": "Nationality",
+   "options": "Indian\nNRI\nForeign National"
+  },
+  {
+   "fieldname": "section_consent",
+   "fieldtype": "Section Break",
+   "label": "Consents & Declarations"
+  },
+  {
+   "fieldname": "dir_2_signed",
+   "fieldtype": "Check",
+   "label": "DIR-2 Consent to act as Director signed"
+  },
+  {
+   "fieldname": "dir_8_signed",
+   "fieldtype": "Check",
+   "label": "DIR-8 Non-disqualification declaration signed"
+  },
+  {
+   "fieldname": "mbp_1_signed",
+   "fieldtype": "Check",
+   "label": "MBP-1 Disclosure of Interest signed"
+  },
+  {
+   "fieldname": "section_address",
+   "fieldtype": "Section Break",
+   "label": "Address"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Text",
+   "label": "Residential Address"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "Startup Legal",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Startup Founder",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Startup Admin",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ],
+ "title_field": "director_name",
+ "creation": "2024-04-24 12:00:00.000000",
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator"
+}

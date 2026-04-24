@@ -1,0 +1,162 @@
+{
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "doctype": "DocType",
+ "module": "Cap Table",
+ "name": "ESOP Exercise Request",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "employee",
+  "esop_grant",
+  "col1",
+  "exercise_date",
+  "options_exercised",
+  "exercise_price",
+  "col2",
+  "status",
+  "rejection_reason",
+  "section_financial",
+  "strike_price",
+  "total_exercise_cost",
+  "market_value",
+  "section_allotment",
+  "share_allotment_date",
+  "shares_allotted"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "EXER-.YYYY.-",
+   "print_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "esop_grant",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "ESOP Grant",
+   "options": "ESOP Grant",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "exercise_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Exercise Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "options_exercised",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Options to Exercise",
+   "reqd": 1
+  },
+  {
+   "fieldname": "exercise_price",
+   "fieldtype": "Currency",
+   "label": "Exercise Price (\u20b9/share)"
+  },
+  {
+   "fieldname": "col2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending\nApproved\nRejected\nCompleted"
+  },
+  {
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection Reason",
+   "depends_on": "eval:doc.status=='Rejected'"
+  },
+  {
+   "fieldname": "section_financial",
+   "fieldtype": "Section Break",
+   "label": "Financial Details"
+  },
+  {
+   "fieldname": "strike_price",
+   "fieldtype": "Currency",
+   "label": "Grant Strike Price (\u20b9/share)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_exercise_cost",
+   "fieldtype": "Currency",
+   "label": "Total Exercise Cost (\u20b9)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "market_value",
+   "fieldtype": "Currency",
+   "label": "Current Market Value Estimate (\u20b9)"
+  },
+  {
+   "fieldname": "section_allotment",
+   "fieldtype": "Section Break",
+   "label": "Share Allotment",
+   "depends_on": "eval:doc.status=='Approved'"
+  },
+  {
+   "fieldname": "share_allotment_date",
+   "fieldtype": "Date",
+   "label": "Allotment Date"
+  },
+  {
+   "fieldname": "shares_allotted",
+   "fieldtype": "Int",
+   "label": "Shares Allotted"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "Startup Founder",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Startup Admin",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Startup Legal",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1
+  }
+ ],
+ "title_field": "employee",
+ "sort_order": "DESC",
+ "creation": "2024-04-24 12:00:00.000000",
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator"
+}

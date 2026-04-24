@@ -1,0 +1,199 @@
+{
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "doctype": "DocType",
+ "module": "Fundraising",
+ "name": "Funding Readiness Score",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "company",
+  "computed_on",
+  "overall_score",
+  "col1",
+  "stage_recommendation",
+  "section_team",
+  "team_score",
+  "team_notes",
+  "section_product",
+  "product_score",
+  "product_notes",
+  "section_traction",
+  "traction_score",
+  "traction_notes",
+  "section_legal",
+  "legal_score",
+  "legal_notes",
+  "section_finance",
+  "finance_score",
+  "finance_notes",
+  "section_market",
+  "market_score",
+  "market_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "FRS-.YYYY.-",
+   "print_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "computed_on",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Computed On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "overall_score",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Overall Score (0-100)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "col1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "stage_recommendation",
+   "fieldtype": "Data",
+   "label": "Recommended Stage",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_team",
+   "fieldtype": "Section Break",
+   "label": "Team (max 20)"
+  },
+  {
+   "fieldname": "team_score",
+   "fieldtype": "Int",
+   "label": "Team Score",
+   "read_only": 1
+  },
+  {
+   "fieldname": "team_notes",
+   "fieldtype": "Small Text",
+   "label": "Team Observations",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_product",
+   "fieldtype": "Section Break",
+   "label": "Product & Technology (max 20)"
+  },
+  {
+   "fieldname": "product_score",
+   "fieldtype": "Int",
+   "label": "Product Score",
+   "read_only": 1
+  },
+  {
+   "fieldname": "product_notes",
+   "fieldtype": "Small Text",
+   "label": "Product Observations",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_traction",
+   "fieldtype": "Section Break",
+   "label": "Traction & Revenue (max 20)"
+  },
+  {
+   "fieldname": "traction_score",
+   "fieldtype": "Int",
+   "label": "Traction Score",
+   "read_only": 1
+  },
+  {
+   "fieldname": "traction_notes",
+   "fieldtype": "Small Text",
+   "label": "Traction Observations",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_legal",
+   "fieldtype": "Section Break",
+   "label": "Legal & Compliance (max 20)"
+  },
+  {
+   "fieldname": "legal_score",
+   "fieldtype": "Int",
+   "label": "Legal Score",
+   "read_only": 1
+  },
+  {
+   "fieldname": "legal_notes",
+   "fieldtype": "Small Text",
+   "label": "Legal Observations",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_finance",
+   "fieldtype": "Section Break",
+   "label": "Financials & Runway (max 20)"
+  },
+  {
+   "fieldname": "finance_score",
+   "fieldtype": "Int",
+   "label": "Finance Score",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finance_notes",
+   "fieldtype": "Small Text",
+   "label": "Finance Observations",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_market",
+   "fieldtype": "Section Break",
+   "label": "Market Opportunity"
+  },
+  {
+   "fieldname": "market_score",
+   "fieldtype": "Int",
+   "label": "Market Score",
+   "read_only": 1
+  },
+  {
+   "fieldname": "market_notes",
+   "fieldtype": "Small Text",
+   "label": "Market Observations",
+   "read_only": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "Startup Founder",
+   "permlevel": 0,
+   "read": 1,
+   "write": 0,
+   "create": 0
+  },
+  {
+   "role": "Startup Admin",
+   "permlevel": 0,
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ],
+ "creation": "2024-04-24 12:00:00.000000",
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator"
+}

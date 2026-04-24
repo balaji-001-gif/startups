@@ -1,0 +1,100 @@
+{
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "doctype": "DocType",
+ "module": "Compliance",
+ "name": "Legal Template",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "template_name",
+  "category",
+  "description",
+  "sb_body",
+  "template_body",
+  "section_variables",
+  "variables_help"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "LTPL-.YYYY.-",
+   "print_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "template_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Template Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Category",
+   "options": "Founders Agreement\nNDA\nShareholders Agreement\nEmployment Agreement\nESOPs Grant Letter\nAdvisory Agreement\nVendor Agreement\nBoard Resolution\nOther"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "sb_body",
+   "fieldtype": "Section Break",
+   "label": "Template Content"
+  },
+  {
+   "fieldname": "template_body",
+   "fieldtype": "Text Editor",
+   "label": "Template Body (Jinja2 supported)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_variables",
+   "fieldtype": "Section Break",
+   "label": "Available Variables"
+  },
+  {
+   "fieldname": "variables_help",
+   "fieldtype": "HTML",
+   "label": "Variables Help",
+   "options": "<div style='background:#f8f9fa;padding:10px;border-radius:6px;font-size:11px;'><b>Available Template Variables:</b><br>{{ company_name }} \u2014 Legal name of the company<br>{{ founder_name }} \u2014 Founder full name<br>{{ cofounder_name }} \u2014 Co-founder name<br>{{ investor_name }} \u2014 Investor name<br>{{ amount }} \u2014 Investment amount<br>{{ date }} \u2014 Today's date<br>{{ city }} \u2014 City of execution<br>{{ shares }} \u2014 Number of shares<br>{{ valuation }} \u2014 Company valuation<br>{{ cliff_months }} \u2014 ESOP cliff months<br>{{ vesting_months }} \u2014 Total vesting months<br>{{ grant_date }} \u2014 ESOP grant date<br>{{ employee_name }} \u2014 Employee name<br>{{ options_count }} \u2014 Number of options granted</div>"
+  }
+ ],
+ "permissions": [
+  {
+   "permlevel": 0,
+   "role": "Startup Legal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "permlevel": 0,
+   "role": "Startup Founder",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "permlevel": 0,
+   "role": "Startup Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ],
+ "title_field": "template_name",
+ "creation": "2024-04-24 12:00:00.000000",
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator"
+}

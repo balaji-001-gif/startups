@@ -1,0 +1,109 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "creation": "2024-04-24 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "room_name",
+  "company",
+  "round_name",
+  "col_break_1",
+  "status",
+  "expires_on",
+  "section_documents",
+  "documents",
+  "section_access",
+  "access_list"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "DR-.YYYY.-",
+   "print_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "room_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Room Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "round_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Fundraising Round",
+   "placeholder": "e.g. Pre-Series A"
+  },
+  {
+   "fieldname": "col_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Active\nClosed\nArchived"
+  },
+  {
+   "fieldname": "expires_on",
+   "fieldtype": "Datetime",
+   "label": "Access Expires On"
+  },
+  {
+   "fieldname": "section_documents",
+   "fieldtype": "Section Break",
+   "label": "Documents"
+  },
+  {
+   "fieldname": "documents",
+   "fieldtype": "Table",
+   "label": "Documents",
+   "options": "Data Room Document"
+  },
+  {
+   "fieldname": "section_access",
+   "fieldtype": "Section Break",
+   "label": "Investor Access"
+  },
+  {
+   "fieldname": "access_list",
+   "fieldtype": "Table",
+   "label": "Investor Access List",
+   "options": "Data Room Access"
+  }
+ ],
+ "links": [],
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Fundraising",
+ "name": "Data Room",
+ "owner": "Administrator",
+ "permissions": [
+  {"permlevel": 0, "role": "Startup Founder", "read": 1, "write": 1, "create": 1, "delete": 0},
+  {"permlevel": 0, "role": "Startup Admin", "read": 1, "write": 1, "create": 1, "delete": 1},
+  {"permlevel": 0, "role": "Startup Legal", "read": 1, "write": 1, "create": 1, "delete": 0}
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "room_name",
+ "track_changes": 1
+}
