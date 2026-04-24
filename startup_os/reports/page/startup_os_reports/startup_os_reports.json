@@ -1,0 +1,13 @@
+{
+ "doctype": "Page",
+ "module": "Reports",
+ "name": "startup-os-reports",
+ "page_name": "startup-os-reports",
+ "title": "StartupOS Reports",
+ "roles": [
+  {"role": "Startup Founder"},
+  {"role": "Startup CFO"},
+  {"role": "Startup Admin"},
+  {"role": "Startup Legal"}
+ ]
+}
