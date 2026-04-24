@@ -1,27 +1,35 @@
 {
   "charts": [],
-  "content": "[]",
-  "creation": "2024-04-24 12:00:00.000000",
+  "content": "[{\"id\": \"cb-compliance\", \"type\": \"card\", \"data\": {\"card_name\": \"Compliance Hub\", \"col\": 12}}, {\"id\": \"cb-fundraising\", \"type\": \"card\", \"data\": {\"card_name\": \"Fundraising OS\", \"col\": 12}}, {\"id\": \"cb-captable\", \"type\": \"card\", \"data\": {\"card_name\": \"Cap Table\", \"col\": 12}}, {\"id\": \"cb-financial\", \"type\": \"card\", \"data\": {\"card_name\": \"Financial & Runway\", \"col\": 12}}, {\"id\": \"cb-legal\", \"type\": \"card\", \"data\": {\"card_name\": \"Legal & Governance\", \"col\": 12}}, {\"id\": \"cb-ai\", \"type\": \"card\", \"data\": {\"card_name\": \"AI Assistant\", \"col\": 12}}]",
+  "creation": "2025-04-24 12:00:00.000000",
+  "developer_mode_only": 0,
+  "disable_user_customization": 0,
+  "docstatus": 0,
   "doctype": "Workspace",
   "extends": "",
   "extends_another_page": 0,
+  "for_user": "",
   "hide_custom": 0,
   "icon": "rocket",
+  "idx": 0,
+  "is_default": 0,
   "is_hidden": 0,
   "label": "StartupOS",
   "links": [
     {
-      "dependencies": "",
       "hidden": 0,
+      "idx": 1,
       "is_query_report": 0,
       "label": "Compliance Hub",
       "link_count": 0,
       "onboard": 0,
+      "title": "Compliance Hub",
       "type": "Card Break"
     },
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 2,
       "is_query_report": 0,
       "label": "DPIIT Application",
       "link_count": 0,
@@ -33,6 +41,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 3,
       "is_query_report": 0,
       "label": "Incorporation Checklist",
       "link_count": 0,
@@ -44,6 +53,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 4,
       "is_query_report": 0,
       "label": "Regulatory Calendar",
       "link_count": 0,
@@ -55,6 +65,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 5,
       "is_query_report": 0,
       "label": "Compliance Score",
       "link_count": 0,
@@ -66,6 +77,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 6,
       "is_query_report": 0,
       "label": "Compliance Alert Setting",
       "link_count": 0,
@@ -75,17 +87,19 @@
       "type": "Link"
     },
     {
-      "dependencies": "",
       "hidden": 0,
+      "idx": 7,
       "is_query_report": 0,
       "label": "Fundraising OS",
       "link_count": 0,
       "onboard": 0,
+      "title": "Fundraising OS",
       "type": "Card Break"
     },
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 8,
       "is_query_report": 0,
       "label": "Investor",
       "link_count": 0,
@@ -97,6 +111,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 9,
       "is_query_report": 0,
       "label": "Investor Contact",
       "link_count": 0,
@@ -108,6 +123,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 10,
       "is_query_report": 0,
       "label": "Fundraising Opportunity",
       "link_count": 0,
@@ -119,6 +135,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 11,
       "is_query_report": 0,
       "label": "Investor Update",
       "link_count": 0,
@@ -130,6 +147,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 12,
       "is_query_report": 0,
       "label": "Pitch Deck Vault",
       "link_count": 0,
@@ -139,17 +157,19 @@
       "type": "Link"
     },
     {
-      "dependencies": "",
       "hidden": 0,
+      "idx": 13,
       "is_query_report": 0,
       "label": "Cap Table",
       "link_count": 0,
       "onboard": 0,
+      "title": "Cap Table",
       "type": "Card Break"
     },
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 14,
       "is_query_report": 0,
       "label": "Shareholder",
       "link_count": 0,
@@ -161,6 +181,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 15,
       "is_query_report": 0,
       "label": "Equity Transaction",
       "link_count": 0,
@@ -172,6 +193,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 16,
       "is_query_report": 0,
       "label": "ESOP Grant",
       "link_count": 0,
@@ -183,6 +205,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 17,
       "is_query_report": 0,
       "label": "Share Certificate",
       "link_count": 0,
@@ -192,17 +215,19 @@
       "type": "Link"
     },
     {
-      "dependencies": "",
       "hidden": 0,
+      "idx": 18,
       "is_query_report": 0,
       "label": "Financial & Runway",
       "link_count": 0,
       "onboard": 0,
+      "title": "Financial & Runway",
       "type": "Card Break"
     },
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 19,
       "is_query_report": 0,
       "label": "Runway Model",
       "link_count": 0,
@@ -214,6 +239,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 20,
       "is_query_report": 0,
       "label": "Unit Economics",
       "link_count": 0,
@@ -225,6 +251,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 21,
       "is_query_report": 0,
       "label": "Budget Plan",
       "link_count": 0,
@@ -234,17 +261,19 @@
       "type": "Link"
     },
     {
-      "dependencies": "",
       "hidden": 0,
+      "idx": 22,
       "is_query_report": 0,
       "label": "Legal & Governance",
       "link_count": 0,
       "onboard": 0,
+      "title": "Legal & Governance",
       "type": "Card Break"
     },
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 23,
       "is_query_report": 0,
       "label": "Board Meeting",
       "link_count": 0,
@@ -256,6 +285,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 24,
       "is_query_report": 0,
       "label": "Board Minutes",
       "link_count": 0,
@@ -267,6 +297,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 25,
       "is_query_report": 0,
       "label": "Contract Document",
       "link_count": 0,
@@ -278,6 +309,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 26,
       "is_query_report": 0,
       "label": "IP Tracker",
       "link_count": 0,
@@ -289,6 +321,7 @@
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 27,
       "is_query_report": 0,
       "label": "FEMA FDI Tracker",
       "link_count": 0,
@@ -298,17 +331,19 @@
       "type": "Link"
     },
     {
-      "dependencies": "",
       "hidden": 0,
+      "idx": 28,
       "is_query_report": 0,
       "label": "AI Assistant",
       "link_count": 0,
       "onboard": 0,
+      "title": "AI Assistant",
       "type": "Card Break"
     },
     {
       "dependencies": "",
       "hidden": 0,
+      "idx": 29,
       "is_query_report": 0,
       "label": "AI Chat Session",
       "link_count": 0,
@@ -324,6 +359,7 @@
   "name": "StartupOS",
   "owner": "Administrator",
   "public": 1,
+  "restrict_to_domain": "",
   "roles": [
     {
       "role": "System Manager"
@@ -332,30 +368,54 @@
       "role": "Startup Admin"
     }
   ],
-  "sequence_id": 100,
+  "sequence_id": 100.0,
   "shortcuts": [
     {
       "color": "Orange",
+      "format": "{} Score",
       "label": "Compliance Score",
       "link_to": "Compliance Score",
+      "stats_filter": "{}",
       "type": "DocType"
     },
     {
       "color": "Blue",
+      "format": "{} Active",
       "label": "Runway Model",
       "link_to": "Runway Model",
+      "stats_filter": "{}",
       "type": "DocType"
     },
     {
       "color": "Green",
+      "format": "{} Open",
       "label": "Fundraising Opportunity",
       "link_to": "Fundraising Opportunity",
+      "stats_filter": "{\"status\": [\"in\", [\"Prospecting\", \"Pitch Sent\", \"Due Diligence\"]]}",
       "type": "DocType"
     },
     {
       "color": "Purple",
+      "format": "{} Transactions",
       "label": "Equity Transaction",
       "link_to": "Equity Transaction",
+      "stats_filter": "{}",
+      "type": "DocType"
+    },
+    {
+      "color": "Teal",
+      "format": "{} Pending",
+      "label": "Board Meeting",
+      "link_to": "Board Meeting",
+      "stats_filter": "{\"status\": [\"in\", [\"Scheduled\", \"Draft\"]]}",
+      "type": "DocType"
+    },
+    {
+      "color": "Red",
+      "format": "{} Active",
+      "label": "ESOP Grant",
+      "link_to": "ESOP Grant",
+      "stats_filter": "{\"status\": \"Active\"}",
       "type": "DocType"
     }
   ],
