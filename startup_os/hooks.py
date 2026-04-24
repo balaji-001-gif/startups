@@ -233,3 +233,4 @@ scheduler_events = {
 #		]
 #	}
 # ]
+fixtures = [ {"doctype": "Workspace", "filters": [["module", "=", "StartupOS"]]},
