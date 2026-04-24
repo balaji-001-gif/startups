@@ -233,4 +233,41 @@ scheduler_events = {
 #		]
 #	}
 # ]
-fixtures = [ {"doctype": "Workspace", "filters": [["module", "=", "StartupOS"]]},
+# ── Fixtures ───────────────────────────────────────────────
+fixtures = [
+    # Roles
+    {'dt': 'Role', 'filters': [['name', 'in', [
+        'Startup Admin',
+        'Compliance Officer',
+        'Finance Executive',
+        'Legal Counsel',
+        'Investor Relations',
+        'Board Member',
+        'ESOP Manager',
+        'AI Assistant User',
+    ]]]},
+
+    # Workspace & UI
+    {'dt': 'Workspace'},
+    {'dt': 'Workflow'},
+    {'dt': 'Workflow State'},
+    {'dt': 'Workflow Action Master'},
+    {'dt': 'Print Format'},
+    {'dt': 'Report'},
+
+    # Field & Form Customisation
+    {'dt': 'Custom Field'},
+    {'dt': 'Property Setter'},
+    {'dt': 'Client Script'},
+    {'dt': 'Server Script'},
+
+    # StartupOS Config DocTypes
+    {'dt': 'Visa Country Config'},          # keep if reused from travel app
+    {'dt': 'Compliance Alert Setting'},
+    {'dt': 'Compliance Score'},
+
+    # Notification & Automation
+    {'dt': 'Notification'},
+    {'dt': 'Auto Repeat'},
+    {'dt': 'Assignment Rule'},
+]
