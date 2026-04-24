@@ -2,5 +2,6 @@
 import frappe
 from frappe.model.document import Document
 
-class UdataUroom(Document):
+
+class DataRoom(Document):
     pass
