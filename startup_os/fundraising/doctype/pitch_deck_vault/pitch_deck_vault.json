@@ -5,12 +5,25 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "company",
   "version_name",
   "file",
   "is_active"
  ],
  "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "oldfieldname": "naming_series",
+   "oldfieldtype": "Select",
+   "print_hide": 1,
+   "search_index": 0,
+   "no_copy": 1,
+   "unique": 0,
+   "options": "PDV-.YYYY.-"
+  },
   {
    "fieldname": "company",
    "fieldtype": "Link",
@@ -62,5 +75,7 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field"
 }

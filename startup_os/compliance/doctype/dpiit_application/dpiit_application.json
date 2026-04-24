@@ -1,12 +1,13 @@
 {
  "actions": [],
  "allow_import": 1,
- "autoname": "format:DPIIT-{YYYY}-{####}",
+ "autoname": "naming_series:",
  "creation": "2024-04-24 12:00:00.000000",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "company",
   "application_number",
   "status",
@@ -18,6 +19,18 @@
   "documents"
  ],
  "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "oldfieldname": "naming_series",
+   "oldfieldtype": "Select",
+   "print_hide": 1,
+   "search_index": 0,
+   "no_copy": 1,
+   "unique": 0,
+   "options": "DPIIT-.YYYY.-"
+  },
   {
    "fieldname": "company",
    "fieldtype": "Link",
@@ -75,7 +88,6 @@
  "modified_by": "Administrator",
  "module": "Compliance",
  "name": "DPIIT Application",
- "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -105,5 +117,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "naming_rule": "By \"Naming Series\" field"
 }

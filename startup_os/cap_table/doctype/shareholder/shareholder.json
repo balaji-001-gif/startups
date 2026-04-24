@@ -5,6 +5,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "shareholder_name",
   "company",
   "shareholder_type",
@@ -13,6 +14,18 @@
   "ownership_percent"
  ],
  "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "oldfieldname": "naming_series",
+   "oldfieldtype": "Select",
+   "print_hide": 1,
+   "search_index": 0,
+   "no_copy": 1,
+   "unique": 0,
+   "options": "SH-.YYYY.-"
+  },
   {
    "fieldname": "shareholder_name",
    "fieldtype": "Data",
@@ -75,5 +88,7 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field"
 }

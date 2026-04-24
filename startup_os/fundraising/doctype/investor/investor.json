@@ -5,6 +5,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "investor_name",
   "investor_type",
   "website",
@@ -14,6 +15,18 @@
   "portfolio_count"
  ],
  "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "oldfieldname": "naming_series",
+   "oldfieldtype": "Select",
+   "print_hide": 1,
+   "search_index": 0,
+   "no_copy": 1,
+   "unique": 0,
+   "options": "INV-.YYYY.-"
+  },
   {
    "fieldname": "investor_name",
    "fieldtype": "Data",
@@ -78,5 +91,7 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field"
 }
