@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Helvetica Neue',Arial,sans-serif; font-size:10.5px; color:#1a1a2e; background:#fff; }
+  .cover { background:linear-gradient(135deg,#0F172A 0%,#1E3A5F 100%); color:#fff; padding:50px; }
+  .cover h1 { font-size:24px; font-weight:800; margin-bottom:6px; }
+  .cover .sub { font-size:13px; opacity:0.7; }
+  .cover .date-line { margin-top:20px; font-size:10px; opacity:0.5; }
+  .page { padding:36px 50px; }
+  h2 { font-size:14px; font-weight:700; color:#0F172A; background:#F1F5F9; padding:8px 12px; border-radius:6px; margin:24px 0 12px; border-left:4px solid #1E3A5F; }
+  table { width:100%; border-collapse:collapse; font-size:10px; margin-bottom:16px; }
+  thead tr { background:#0F172A; color:#fff; }
+  thead th { padding:9px 12px; text-align:left; font-size:9px; text-transform:uppercase; letter-spacing:0.6px; }
+  tbody tr:nth-child(even) { background:#F8FAFC; }
+  tbody td { padding:8px 12px; border-bottom:1px solid #E2E8F0; vertical-align:middle; }
+  .big-pct { font-size:24px; font-weight:800; color:#1E3A5F; }
+  .pct-bar-bg { background:#E2E8F0; border-radius:99px; height:10px; margin-top:4px; }
+  .pct-bar { background:linear-gradient(90deg,#1E3A5F,#2D6A4F); height:10px; border-radius:99px; }
+  .summary-box { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:20px; }
+  .s-card { background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:10px; padding:14px; text-align:center; }
+  .s-card .num { font-size:22px; font-weight:800; color:#1E3A5F; }
+  .s-card .lbl { font-size:9px; color:#94A3B8; text-transform:uppercase; margin-top:4px; letter-spacing:0.5px; }
+  .badge { display:inline-block; border-radius:4px; padding:2px 8px; font-size:9px; font-weight:700; }
+  .badge-founder { background:#DBEAFE; color:#1E40AF; }
+  .badge-investor { background:#DCFCE7; color:#166534; }
+  .badge-company { background:#F3E8FF; color:#6B21A8; }
+  .badge-employee { background:#FEF3C7; color:#92400E; }
+  .divider { border:none; border-top:2px dashed #E2E8F0; margin:20px 0; }
+  .note { font-size:9px; color:#94A3B8; margin-top:6px; font-style:italic; }
+  .footer { background:#0F172A; color:rgba(255,255,255,0.6); text-align:center; padding:14px; font-size:9px; margin-top:30px; }
+  .chart-stub { background:#F8FAFC; border:1px dashed #CBD5E1; border-radius:8px; padding:20px; text-align:center; color:#94A3B8; font-size:10px; margin-bottom:16px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="font-size:9px;opacity:0.5;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">CONFIDENTIAL CAP TABLE DOCUMENT</div>
+  <h1>{{ company }}</h1>
+  <div class="sub">Share Capital & Ownership Structure</div>
+  <div class="sub">As of: <strong>{{ as_of_date }}</strong></div>
+  <div class="date-line">Generated: {{ generated_on }} | StartupOS Cap Table Management</div>
+</div>
+
+<div class="page">
+
+  <!-- SUMMARY STATS -->
+  {% set total_shares_calc = namespace(v=0) %}
+  {% for sh in shareholders %}{% set total_shares_calc.v = total_shares_calc.v + (sh.total_shares or 0) %}{% endfor %}
+
+  <div class="summary-box">
+    <div class="s-card">
+      <div class="num">{{ shareholders|length }}</div>
+      <div class="lbl">Shareholders</div>
+    </div>
+    <div class="s-card">
+      <div class="num">{{ "{:,.0f}".format(total_shares) }}</div>
+      <div class="lbl">Total Shares (Basic)</div>
+    </div>
+    <div class="s-card">
+      <div class="num">{{ "{:,.0f}".format(total_esop_granted) }}</div>
+      <div class="lbl">ESOP Options Granted</div>
+    </div>
+    <div class="s-card">
+      <div class="num">{{ "{:,.0f}".format(total_shares + total_esop_granted) }}</div>
+      <div class="lbl">Fully Diluted Shares</div>
+    </div>
+  </div>
+
+  <!-- OWNERSHIP TABLE -->
+  <h2>📋 Shareholders — Ownership Summary</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Shareholder Name</th>
+        <th>Type</th>
+        <th>Share Classes</th>
+        <th style="text-align:right;">Total Shares</th>
+        <th style="text-align:right;">% (Basic)</th>
+        <th style="text-align:right;">% (FD)</th>
+        <th style="min-width:100px;">Ownership</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sh in shareholders %}
+      {% set fd_pct = (sh.total_shares or 0) / (total_shares + total_esop_granted) * 100 if (total_shares + total_esop_granted) > 0 else 0 %}
+      <tr>
+        <td style="color:#94A3B8;font-weight:600;">{{ loop.index }}</td>
+        <td><strong>{{ sh.shareholder_name }}</strong></td>
+        <td>
+          <span class="badge badge-{{ sh.shareholder_type|lower if sh.shareholder_type in ['Founder','Investor','Employee','Company'] else 'company' }}">
+            {{ sh.shareholder_type }}
+          </span>
+        </td>
+        <td>{{ sh.share_classes|join(', ') if sh.share_classes else '—' }}</td>
+        <td style="text-align:right;font-family:monospace;">{{ "{:,.0f}".format(sh.total_shares or 0) }}</td>
+        <td style="text-align:right;font-weight:700;">{{ "%.2f"|format(sh.ownership_percent or 0) }}%</td>
+        <td style="text-align:right;color:#64748B;">{{ "%.2f"|format(fd_pct) }}%</td>
+        <td style="padding:8px 12px;">
+          <div class="pct-bar-bg">
+            <div class="pct-bar" style="width:{{ [sh.ownership_percent or 0, 100]|min }}%;"></div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+      <!-- ESOP Row -->
+      {% if total_esop_granted > 0 %}
+      {% set esop_fd_pct = total_esop_granted / (total_shares + total_esop_granted) * 100 %}
+      <tr style="background:#FEF9C3;">
+        <td style="color:#94A3B8;">—</td>
+        <td><strong>ESOP Pool (Unexercised Options)</strong></td>
+        <td><span class="badge badge-employee">Employee</span></td>
+        <td>Warrants</td>
+        <td style="text-align:right;font-family:monospace;">{{ "{:,.0f}".format(total_esop_granted) }}</td>
+        <td style="text-align:right;color:#94A3B8;">—</td>
+        <td style="text-align:right;font-weight:700;color:#D97706;">{{ "%.2f"|format(esop_fd_pct) }}%</td>
+        <td style="padding:8px 12px;">
+          <div class="pct-bar-bg">
+            <div class="pct-bar" style="width:{{ [esop_fd_pct, 100]|min }}%;background:linear-gradient(90deg,#D97706,#F59E0B);"></div>
+          </div>
+        </td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+  <div class="note">* FD = Fully Diluted (includes all ESOP options as if exercised)</div>
+
+  <div class="divider"></div>
+
+  <!-- TRANSACTION HISTORY PER SHAREHOLDER -->
+  <h2>🕒 Equity Transaction History</h2>
+  {% for sh in shareholders %}
+  {% if sh.transactions %}
+  <div style="margin-bottom:14px;">
+    <div style="font-weight:700;font-size:11px;color:#1E3A5F;margin-bottom:6px;">{{ sh.shareholder_name }}</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th><th>Transaction Type</th><th>Share Class</th>
+          <th style="text-align:right;">Quantity</th><th style="text-align:right;">Price/Share (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tx in sh.transactions %}
+        <tr>
+          <td>{{ tx.date }}</td>
+          <td>{{ tx.transaction_type }}</td>
+          <td>{{ tx.share_type }}</td>
+          <td style="text-align:right;font-family:monospace;">{{ "{:,.0f}".format(tx.quantity or 0) }}</td>
+          <td style="text-align:right;font-family:monospace;">{{ "₹{:,.2f}".format(tx.price_per_share or 0) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+  <!-- ESOP GRANTS -->
+  {% if esop_grants %}
+  <div class="divider"></div>
+  <h2>🎖 ESOP Grants Summary</h2>
+  <table>
+    <thead>
+      <tr><th>Grantee (Employee ID)</th><th>Grant Date</th><th style="text-align:right;">Options Granted</th></tr>
+    </thead>
+    <tbody>
+      {% for g in esop_grants %}
+      <tr>
+        <td>{{ g.employee }}</td>
+        <td>{{ g.grant_date }}</td>
+        <td style="text-align:right;font-family:monospace;font-weight:700;">{{ "{:,.0f}".format(g.quantity or 0) }}</td>
+      </tr>
+      {% endfor %}
+      <tr style="background:#F1F5F9;font-weight:700;">
+        <td colspan="2"><strong>Total ESOP Options Granted</strong></td>
+        <td style="text-align:right;font-family:monospace;">{{ "{:,.0f}".format(total_esop_granted) }}</td>
+      </tr>
+    </tbody>
+  </table>
+  {% endif %}
+
+</div>
+
+<div class="footer">
+  StartupOS Cap Table Report | {{ company }} | As of {{ as_of_date }} | CONFIDENTIAL
+</div>
+</body>
+</html>

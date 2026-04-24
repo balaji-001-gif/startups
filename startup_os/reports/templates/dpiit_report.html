@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Helvetica Neue',Arial,sans-serif; font-size:10.5px; color:#1a1a2e; background:#fff; }
+  .cover { background:linear-gradient(135deg,#14532D 0%,#1E3A5F 100%); color:#fff; padding:50px; }
+  .cover .flag { font-size:30px; margin-bottom:10px; }
+  .cover h1 { font-size:24px; font-weight:800; }
+  .cover .sub { font-size:12px; opacity:0.75; margin-top:4px; }
+  .cover .status-pill { display:inline-block; margin-top:16px; padding:6px 18px; border-radius:20px; font-size:11px; font-weight:700; }
+  .pill-green { background:#22C55E; color:#fff; }
+  .pill-yellow { background:#EAB308; color:#fff; }
+  .pill-red { background:#EF4444; color:#fff; }
+  .page { padding:36px 50px; }
+  h2 { font-size:13px; font-weight:700; color:#14532D; border-left:4px solid #14532D; padding-left:10px; margin:22px 0 10px; }
+  .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:18px; }
+  .card { background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px; }
+  .card.red { background:#FFF1F2; border-color:#FECDD3; }
+  .card.yellow { background:#FEFCE8; border-color:#FEF08A; }
+  .card .lbl { font-size:9px; color:#64748B; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:4px; }
+  .card .val { font-size:18px; font-weight:800; color:#14532D; }
+  .card.red .val { color:#DC2626; }
+  .card.yellow .val { color:#D97706; }
+  table { width:100%; border-collapse:collapse; font-size:10px; margin-bottom:16px; }
+  thead tr { background:#14532D; color:#fff; }
+  thead th { padding:8px 12px; text-align:left; font-size:9px; text-transform:uppercase; letter-spacing:0.5px; }
+  tbody tr:nth-child(even) { background:#F0FDF4; }
+  tbody td { padding:7px 12px; border-bottom:1px solid #E2E8F0; }
+  .check { color:#22C55E; font-weight:700; }
+  .cross { color:#EF4444; font-weight:700; }
+  .dash  { color:#94A3B8; }
+  .badge-filed    { background:#DCFCE7; color:#166534; border-radius:4px; padding:2px 8px; font-size:9px; font-weight:700; }
+  .badge-upcoming { background:#FEF9C3; color:#854D0E; border-radius:4px; padding:2px 8px; font-size:9px; font-weight:700; }
+  .badge-overdue  { background:#FEE2E2; color:#991B1B; border-radius:4px; padding:2px 8px; font-size:9px; font-weight:700; }
+  .score-big { text-align:center; padding:24px; background:#F0FDF4; border-radius:14px; margin-bottom:20px; }
+  .score-big .num { font-size:64px; font-weight:900; color:#14532D; line-height:1; }
+  .score-big .denom { font-size:20px; color:#94A3B8; }
+  .score-big .label { font-size:11px; color:#64748B; margin-top:6px; }
+  .breakdown-item { display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid #F1F5F9; font-size:10px; }
+  .footer { background:#14532D; color:rgba(255,255,255,0.7); text-align:center; padding:14px; font-size:9px; margin-top:30px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="flag">🇮🇳</div>
+  <h1>{{ company }}</h1>
+  <div class="sub">DPIIT & Startup India Compliance Report</div>
+  <div class="sub">{{ generated_on }}</div>
+  {% if dpiit %}
+    {% if dpiit.status == 'Recognized' %}
+      <div class="status-pill pill-green">✅ DPIIT Recognized</div>
+    {% elif dpiit.status == 'Pending' %}
+      <div class="status-pill pill-yellow">⏳ Application Pending</div>
+    {% else %}
+      <div class="status-pill pill-red">⚠️ {{ dpiit.status }}</div>
+    {% endif %}
+  {% endif %}
+</div>
+
+<div class="page">
+
+  <!-- COMPLIANCE SCORE -->
+  {% if compliance_score %}
+  <div class="score-big">
+    <div class="num">{{ compliance_score.score }}<span class="denom">/100</span></div>
+    <div class="label">Compliance Health Score — Last computed {{ compliance_score.last_computed }}</div>
+  </div>
+  {% endif %}
+
+  <!-- DPIIT DETAILS -->
+  {% if dpiit %}
+  <h2>DPIIT Recognition Details</h2>
+  <div class="grid-3">
+    <div class="card">
+      <div class="lbl">Application Number</div>
+      <div class="val" style="font-size:13px;">{{ dpiit.application_number or '—' }}</div>
+    </div>
+    <div class="card">
+      <div class="lbl">Certificate Number</div>
+      <div class="val" style="font-size:13px;">{{ dpiit.certificate_number or '—' }}</div>
+    </div>
+    <div class="card">
+      <div class="lbl">Recognition Date</div>
+      <div class="val" style="font-size:13px;">{{ dpiit.recognition_date or '—' }}</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- INCORPORATION CHECKLIST -->
+  {% if checklist %}
+  <h2>Post-Incorporation Registrations</h2>
+  <table>
+    <thead><tr><th>Registration</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>INC-20A (Commencement)</td><td>{% if checklist.inc_20a %}<span class="check">✅ Done</span>{% else %}<span class="cross">❌ Pending</span>{% endif %}</td></tr>
+      <tr><td>PAN</td><td>{% if checklist.pan %}<span class="check">✅ Done</span>{% else %}<span class="cross">❌ Pending</span>{% endif %}</td></tr>
+      <tr><td>TAN</td><td>{% if checklist.tan %}<span class="check">✅ Done</span>{% else %}<span class="cross">❌ Pending</span>{% endif %}</td></tr>
+      <tr><td>GST Registration</td><td>{% if checklist.gst %}<span class="check">✅ Done</span>{% else %}<span class="cross">❌ Pending</span>{% endif %}</td></tr>
+      <tr><td>Shops & Establishment</td><td>{% if checklist.shops_and_establishment %}<span class="check">✅ Done</span>{% else %}<span class="cross">❌ Pending</span>{% endif %}</td></tr>
+      {% if checklist.other_registrations %}
+      <tr><td>Other Registrations</td><td>{{ checklist.other_registrations }}</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  <!-- SCORE BREAKDOWN -->
+  {% if score_breakdown %}
+  <h2>Compliance Score Breakdown</h2>
+  {% for item in score_breakdown %}
+  <div class="breakdown-item">
+    <span>{{ item }}</span>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  <!-- FILING STATUS SUMMARY -->
+  <h2>Filing Status Overview</h2>
+  <div class="grid-3">
+    <div class="card">
+      <div class="lbl">Total Tracked Filings</div>
+      <div class="val">{{ total_filings }}</div>
+    </div>
+    <div class="card">
+      <div class="lbl">Filed On Time</div>
+      <div class="val">{{ filed_filings|length }}</div>
+    </div>
+    <div class="card {% if overdue_filings %}red{% else %}yellow{% endif %}">
+      <div class="lbl">Overdue / Upcoming</div>
+      <div class="val">{{ overdue_filings|length }} / {{ upcoming_filings|length }}</div>
+    </div>
+  </div>
+
+  <!-- FILED -->
+  {% if filed_filings %}
+  <h2>✅ Completed Filings</h2>
+  <table>
+    <thead><tr><th>Filing Name</th><th>Form</th><th>Due Date</th><th>Filed On</th></tr></thead>
+    <tbody>
+      {% for f in filed_filings %}
+      <tr>
+        <td>{{ f.filing_name }}</td>
+        <td>{{ f.form_type }}</td>
+        <td>{{ f.due_date }}</td>
+        <td><span class="badge-filed">{{ f.completion_date or '—' }}</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  <!-- UPCOMING -->
+  {% if upcoming_filings %}
+  <h2>⏳ Upcoming Filings</h2>
+  <table>
+    <thead><tr><th>Filing Name</th><th>Form</th><th>Due Date</th><th>Status</th></tr></thead>
+    <tbody>
+      {% for f in upcoming_filings %}
+      <tr>
+        <td>{{ f.filing_name }}</td>
+        <td>{{ f.form_type }}</td>
+        <td>{{ f.due_date }}</td>
+        <td><span class="badge-upcoming">Upcoming</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  <!-- OVERDUE -->
+  {% if overdue_filings %}
+  <h2>🔴 Overdue Filings — Action Required</h2>
+  <table>
+    <thead><tr><th>Filing Name</th><th>Form</th><th>Was Due</th><th>Status</th></tr></thead>
+    <tbody>
+      {% for f in overdue_filings %}
+      <tr>
+        <td><strong>{{ f.filing_name }}</strong></td>
+        <td>{{ f.form_type }}</td>
+        <td>{{ f.due_date }}</td>
+        <td><span class="badge-overdue">OVERDUE</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+</div>
+<div class="footer">
+  StartupOS Compliance Report | {{ company }} | {{ generated_on }} | Confidential
+</div>
+</body>
+</html>

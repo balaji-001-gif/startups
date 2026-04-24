@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Helvetica Neue',Arial,sans-serif; font-size:10px; color:#1a1a2e; background:#fff; }
+  .cover { background:linear-gradient(135deg,#312E81 0%,#1E3A5F 100%); color:#fff; padding:50px; }
+  .cover h1 { font-size:24px; font-weight:800; margin-bottom:6px; }
+  .cover .sub { font-size:12px; opacity:0.75; }
+  .cover .meta { margin-top:20px; font-size:9px; opacity:0.5; }
+  .page { padding:36px 50px; }
+  h2 { font-size:13px; font-weight:700; color:#312E81; border-bottom:2px solid #E0E7FF; padding-bottom:6px; margin:22px 0 12px; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:20px; }
+  .kpi { background:#EEF2FF; border:1px solid #C7D2FE; border-radius:10px; padding:14px; text-align:center; }
+  .kpi .val { font-size:20px; font-weight:800; color:#312E81; }
+  .kpi .lbl { font-size:8px; color:#818CF8; text-transform:uppercase; margin-top:4px; letter-spacing:0.5px; }
+  table { width:100%; border-collapse:collapse; font-size:9.5px; margin-bottom:14px; }
+  thead tr { background:#312E81; color:#fff; }
+  thead th { padding:8px 10px; text-align:left; font-size:8.5px; text-transform:uppercase; }
+  tbody tr:nth-child(even) { background:#F5F3FF; }
+  tbody td { padding:7px 10px; border-bottom:1px solid #E0E7FF; font-family:monospace; }
+  .note { font-size:8.5px; color:#818CF8; margin-top:4px; font-style:italic; }
+  .scenario-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:20px; }
+  .sc { border-radius:10px; padding:16px; }
+  .sc.base { background:#EEF2FF; border:1.5px solid #C7D2FE; }
+  .sc.opt  { background:#ECFDF5; border:1.5px solid #A7F3D0; }
+  .sc.pess { background:#FFF1F2; border:1.5px solid #FECDD3; }
+  .sc .title { font-size:10px; font-weight:700; margin-bottom:8px; }
+  .sc .months { font-size:28px; font-weight:900; }
+  .sc .unit { font-size:11px; font-weight:400; }
+  .sc .formula { font-size:8px; color:#94A3B8; margin-top:4px; }
+  .footer { background:#312E81; color:rgba(255,255,255,0.6); text-align:center; padding:14px; font-size:9px; margin-top:30px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="font-size:9px;opacity:0.5;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">INTERNAL — PITCH READY FINANCIALS</div>
+  <h1>{{ company }}</h1>
+  <div class="sub">Financial Projections — {{ projection_months }}-Month Forecast</div>
+  <div class="meta">Generated: {{ generated_on }} | StartupOS Financial Intelligence</div>
+</div>
+
+<div class="page">
+
+  {% if runway %}
+  <!-- CURRENT FINANCIAL SNAPSHOT -->
+  <h2>Current Financial Position</h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="val">{{ runway.cash_balance | inr }}</div>
+      <div class="lbl">Cash in Bank</div>
+    </div>
+    <div class="kpi">
+      <div class="val">{{ runway.base_burn | inr }}</div>
+      <div class="lbl">Monthly Burn</div>
+    </div>
+    <div class="kpi">
+      <div class="val">{{ "%.1f"|format(runway.runway_base or 0) }} mo</div>
+      <div class="lbl">Base Runway</div>
+    </div>
+    {% if unit_economics %}
+    <div class="kpi">
+      <div class="val">{{ unit_economics.arpu | inr }}</div>
+      <div class="lbl">ARPU / Month</div>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- 3 SCENARIO RUNWAY -->
+  <h2>Scenario Analysis</h2>
+  <div class="scenario-grid">
+    <div class="sc base">
+      <div class="title">📊 Base Case</div>
+      <div class="months">{{ "%.1f"|format(runway.runway_base or 0) }}<span class="unit"> mo</span></div>
+      <div class="formula">At current burn rate of {{ runway.base_burn | inr }}/mo</div>
+    </div>
+    <div class="sc opt">
+      <div class="title">🚀 Optimistic (25% saving)</div>
+      <div class="months">{{ "%.1f"|format(runway.runway_optimistic or 0) }}<span class="unit"> mo</span></div>
+      <div class="formula">Burn reduced to ₹{{ "%.0f"|format((runway.base_burn or 0) * 0.75) }}/mo</div>
+    </div>
+    <div class="sc pess">
+      <div class="title">⚠️ Pessimistic (+30% burn)</div>
+      <div class="months">{{ "%.1f"|format(runway.runway_pessimistic or 0) }}<span class="unit"> mo</span></div>
+      <div class="formula">Burn rises to ₹{{ "%.0f"|format((runway.base_burn or 0) * 1.30) }}/mo</div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if unit_economics %}
+  <!-- UNIT ECONOMICS SNAPSHOT -->
+  <h2>Unit Economics</h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="val">{{ unit_economics.cac | inr }}</div>
+      <div class="lbl">CAC</div>
+    </div>
+    <div class="kpi">
+      <div class="val">{{ unit_economics.ltv | inr }}</div>
+      <div class="lbl">LTV</div>
+    </div>
+    <div class="kpi">
+      <div class="val">{{ "%.1f"|format((unit_economics.ltv or 0) / (unit_economics.cac or 1)) }}x</div>
+      <div class="lbl">LTV : CAC</div>
+    </div>
+    <div class="kpi">
+      <div class="val">{{ "%.1f"|format(unit_economics.payback_period or 0) }} mo</div>
+      <div class="lbl">Payback Period</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- MONTHLY PROJECTIONS TABLE -->
+  <h2>{{ projection_months }}-Month Revenue & Cash Projection</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Period</th>
+        <th style="text-align:right;">Customers</th>
+        <th style="text-align:right;">MRR (₹)</th>
+        <th style="text-align:right;">Monthly Burn (₹)</th>
+        <th style="text-align:right;">Cash Balance (₹)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in projections %}
+      <tr {% if row.cash_balance <= 0 %}style="background:#FEE2E2;"{% endif %}>
+        <td>M+{{ row.month }}</td>
+        <td>{{ row.date }}</td>
+        <td style="text-align:right;">{{ "{:,.0f}".format(row.customers) }}</td>
+        <td style="text-align:right;">{{ "₹{:,.0f}".format(row.mrr) }}</td>
+        <td style="text-align:right;">{{ "₹{:,.0f}".format(row.burn) }}</td>
+        <td style="text-align:right;font-weight:{% if row.cash_balance < 1000000 %}700{% else %}400{% endif %};color:{% if row.cash_balance <= 0 %}#DC2626{% elif row.cash_balance < 1000000 %}#D97706{% else %}#166534{% endif %};">
+          {{ "₹{:,.0f}".format(row.cash_balance) }}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="note">* Projections assume 8% MoM growth and constant burn. Based on current unit economics. Not a guarantee of future performance.</div>
+
+</div>
+<div class="footer">
+  StartupOS Financial Projections | {{ company }} | {{ generated_on }} | Confidential — Do Not Distribute
+</div>
+</body>
+</html>

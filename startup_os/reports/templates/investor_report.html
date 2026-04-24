@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; font-size:11px; color:#1a1a2e; background:#fff; }
+  .cover { background:linear-gradient(135deg,#1E3A5F 0%,#2D6A4F 100%); color:#fff; padding:60px 50px; min-height:200px; }
+  .cover h1 { font-size:28px; font-weight:800; margin-bottom:8px; }
+  .cover .subtitle { font-size:14px; opacity:0.8; margin-bottom:4px; }
+  .cover .date { font-size:11px; opacity:0.6; margin-top:16px; }
+  .cover .badge { display:inline-block; background:rgba(255,255,255,0.2); border-radius:20px; padding:4px 14px; font-size:10px; margin-top:10px; }
+  .page { padding:40px 50px; }
+  h2 { font-size:16px; font-weight:700; color:#1E3A5F; border-left:4px solid #2D6A4F; padding-left:12px; margin:28px 0 16px; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+  .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:20px; }
+  .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:20px; }
+  .metric-card { background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:16px; }
+  .metric-card .label { font-size:9px; color:#64748b; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:4px; }
+  .metric-card .value { font-size:20px; font-weight:800; color:#1E3A5F; }
+  .metric-card .sub { font-size:9px; color:#94a3b8; margin-top:2px; }
+  .metric-card.green .value { color:#2D6A4F; }
+  .metric-card.orange .value { color:#D97706; }
+  .metric-card.red .value { color:#DC2626; }
+  table { width:100%; border-collapse:collapse; font-size:10px; margin-bottom:16px; }
+  thead tr { background:#1E3A5F; color:#fff; }
+  thead th { padding:8px 10px; text-align:left; font-weight:600; font-size:9px; text-transform:uppercase; letter-spacing:0.5px; }
+  tbody tr:nth-child(even) { background:#f8fafc; }
+  tbody td { padding:7px 10px; border-bottom:1px solid #f1f5f9; }
+  .badge-green { background:#DCFCE7; color:#166534; border-radius:4px; padding:2px 8px; font-size:9px; font-weight:600; }
+  .badge-yellow { background:#FEF9C3; color:#854D0E; border-radius:4px; padding:2px 8px; font-size:9px; font-weight:600; }
+  .badge-red { background:#FEE2E2; color:#991B1B; border-radius:4px; padding:2px 8px; font-size:9px; font-weight:600; }
+  .badge-blue { background:#DBEAFE; color:#1E40AF; border-radius:4px; padding:2px 8px; font-size:9px; font-weight:600; }
+  .score-ring { text-align:center; padding:20px; }
+  .score-ring .num { font-size:48px; font-weight:800; color:#1E3A5F; }
+  .score-ring .label { font-size:11px; color:#64748b; }
+  .divider { border:none; border-top:1px solid #e2e8f0; margin:20px 0; }
+  .footer { background:#1E3A5F; color:rgba(255,255,255,0.7); text-align:center; padding:16px; font-size:9px; margin-top:40px; }
+  .confidential { color:#DC2626; font-weight:700; font-size:9px; text-transform:uppercase; letter-spacing:1px; }
+  .highlight-box { background:linear-gradient(135deg,#EFF6FF,#F0FDF4); border:1px solid #BFDBFE; border-radius:10px; padding:16px; margin-bottom:16px; }
+  .progress-bar-bg { background:#E2E8F0; border-radius:99px; height:8px; width:100%; }
+  .progress-bar { background:linear-gradient(90deg,#2D6A4F,#1E3A5F); height:8px; border-radius:99px; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="confidential">🔒 Confidential — For Investor Use Only</div>
+  <h1>{{ company }}</h1>
+  <div class="subtitle">Investor Summary Report</div>
+  <div class="subtitle">{{ generated_on }}</div>
+  {% if dpiit %}
+  <div class="badge">🇮🇳 DPIIT Recognized — {{ dpiit.application_number }}</div>
+  {% endif %}
+</div>
+
+<div class="page">
+
+  <!-- COMPLIANCE SCORE -->
+  {% if compliance %}
+  <div style="display:grid;grid-template-columns:1fr 3fr;gap:20px;align-items:center;background:#f8fafc;border-radius:12px;padding:20px;margin-bottom:20px;">
+    <div class="score-ring">
+      <div class="num">{{ compliance.score }}</div>
+      <div class="label">Compliance Score / 100</div>
+    </div>
+    <div>
+      <h2 style="margin-top:0;">Compliance Snapshot</h2>
+      <div class="grid-3">
+        <div class="metric-card">
+          <div class="label">DPIIT Status</div>
+          <div class="value" style="font-size:14px;">{{ dpiit.status if dpiit else 'N/A' }}</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Recognition No.</div>
+          <div class="value" style="font-size:12px;">{{ dpiit.certificate_number if dpiit else '—' }}</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Upcoming Filings</div>
+          <div class="value">{{ upcoming_filings|length }}</div>
+          <div class="sub">next 30 days</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- FINANCIAL METRICS -->
+  <h2>💸 Financial Highlights</h2>
+  {% if runway %}
+  <div class="grid-4">
+    <div class="metric-card green">
+      <div class="label">Cash in Bank</div>
+      <div class="value">{{ runway.cash_balance | inr }}</div>
+    </div>
+    <div class="metric-card orange">
+      <div class="label">Monthly Burn</div>
+      <div class="value">{{ runway.base_burn | inr }}</div>
+    </div>
+    <div class="metric-card {% if runway.runway_base >= 18 %}green{% elif runway.runway_base >= 12 %}orange{% else %}red{% endif %}">
+      <div class="label">Runway (Base)</div>
+      <div class="value">{{ "%.1f"|format(runway.runway_base or 0) }} mo</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Runway (Optimistic)</div>
+      <div class="value">{{ "%.1f"|format(runway.runway_optimistic or 0) }} mo</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- UNIT ECONOMICS -->
+  {% if unit_economics %}
+  <h2>📊 Unit Economics</h2>
+  <div class="grid-4">
+    <div class="metric-card">
+      <div class="label">ARPU / Month</div>
+      <div class="value">{{ unit_economics.arpu | inr }}</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">CAC</div>
+      <div class="value">{{ unit_economics.cac | inr }}</div>
+    </div>
+    <div class="metric-card green">
+      <div class="label">LTV</div>
+      <div class="value">{{ unit_economics.ltv | inr }}</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">LTV : CAC</div>
+      <div class="value">{{ "%.1f"|format((unit_economics.ltv or 0) / (unit_economics.cac or 1)) }}x</div>
+    </div>
+  </div>
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="label">Monthly Churn</div>
+      <div class="value">{{ "%.1f"|format(unit_economics.churn_rate or 0) }}%</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Payback Period</div>
+      <div class="value">{{ "%.1f"|format(unit_economics.payback_period or 0) }} mo</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Magic Number</div>
+      <div class="value">{{ "%.2f"|format(unit_economics.magic_number or 0) }}</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- CAP TABLE SUMMARY -->
+  {% if shareholders %}
+  <h2>📋 Cap Table Summary</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Shareholder</th>
+        <th>Type</th>
+        <th style="text-align:right;">Shares</th>
+        <th style="text-align:right;">Ownership %</th>
+        <th style="text-align:center;">Ownership Bar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sh in shareholders %}
+      <tr>
+        <td><strong>{{ sh.shareholder_name }}</strong></td>
+        <td>
+          {% if sh.shareholder_type == 'Founder' %}<span class="badge-blue">{{ sh.shareholder_type }}</span>
+          {% elif sh.shareholder_type == 'Investor' %}<span class="badge-green">{{ sh.shareholder_type }}</span>
+          {% else %}<span class="badge-yellow">{{ sh.shareholder_type }}</span>{% endif %}
+        </td>
+        <td style="text-align:right;">{{ "{:,.0f}".format(sh.total_shares or 0) }}</td>
+        <td style="text-align:right;font-weight:700;">{{ "%.2f"|format(sh.ownership_percent or 0) }}%</td>
+        <td style="padding:5px 10px;">
+          <div class="progress-bar-bg">
+            <div class="progress-bar" style="width:{{ [sh.ownership_percent or 0, 100]|min }}%;"></div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if total_esop_pool %}
+  <div style="font-size:10px;color:#64748b;margin-top:4px;">
+    🎯 ESOP Pool: <strong>{{ "{:,.0f}".format(total_esop_pool) }}</strong> options granted
+  </div>
+  {% endif %}
+  {% endif %}
+
+  <!-- FUNDRAISING PIPELINE -->
+  {% if pipeline_summary %}
+  <h2>🎯 Fundraising Pipeline</h2>
+  <div class="grid-4">
+    <div class="metric-card">
+      <div class="label">Active Opportunities</div>
+      <div class="value">{{ pipeline_summary.total_opportunities }}</div>
+    </div>
+    <div class="metric-card green">
+      <div class="label">Total Pipeline Value</div>
+      <div class="value" style="font-size:14px;">{{ pipeline_summary.total_pipeline_value | inr }}</div>
+    </div>
+    <div class="metric-card orange">
+      <div class="label">At Term Sheet</div>
+      <div class="value">{{ pipeline_summary.term_sheets }}</div>
+    </div>
+    <div class="metric-card green">
+      <div class="label">Closed Won</div>
+      <div class="value">{{ pipeline_summary.closed_won }}</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- UPCOMING FILINGS -->
+  {% if upcoming_filings %}
+  <h2>📅 Upcoming Compliance Deadlines</h2>
+  <table>
+    <thead>
+      <tr><th>Filing</th><th>Form</th><th>Due Date</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      {% for f in upcoming_filings %}
+      <tr>
+        <td>{{ f.filing_name }}</td>
+        <td>{{ f.form_type }}</td>
+        <td>{{ f.due_date }}</td>
+        <td><span class="badge-yellow">Upcoming</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+</div>
+
+<div class="footer">
+  Generated by StartupOS | {{ generated_on }} | {{ company }} | Confidential & Proprietary
+</div>
+</body>
+</html>
