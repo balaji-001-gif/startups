@@ -1,0 +1,79 @@
+{
+ "actions": [],
+ "creation": "2024-04-24 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "shareholder_name",
+  "company",
+  "shareholder_type",
+  "column_break_4",
+  "total_shares",
+  "ownership_percent"
+ ],
+ "fields": [
+  {
+   "fieldname": "shareholder_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Shareholder Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shareholder_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Shareholder Type",
+   "options": "Founder\nInvestor\nEmployee\nCompany\nOther"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_shares",
+   "fieldtype": "Float",
+   "label": "Total Shares",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ownership_percent",
+   "fieldtype": "Percent",
+   "label": "Ownership Percent",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cap Table",
+ "name": "Shareholder",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

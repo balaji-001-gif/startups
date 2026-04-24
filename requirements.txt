@@ -1,0 +1,12 @@
+langchain
+openai
+anthropic
+chromadb
+pinecone-client
+weasyprint
+pandas
+numpy
+yfinance
+python-jose
+pyjwt
+frappe-ui

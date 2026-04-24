@@ -1,0 +1,104 @@
+{
+ "actions": [],
+ "creation": "2024-04-24 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "status",
+  "section_break_3",
+  "inc_20a",
+  "pan",
+  "tan",
+  "column_break_7",
+  "gst",
+  "shops_and_establishment",
+  "other_registrations"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending\nComplete"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "inc_20a",
+   "fieldtype": "Check",
+   "label": "INC-20A Filed"
+  },
+  {
+   "default": "0",
+   "fieldname": "pan",
+   "fieldtype": "Check",
+   "label": "PAN Obtained"
+  },
+  {
+   "default": "0",
+   "fieldname": "tan",
+   "fieldtype": "Check",
+   "label": "TAN Obtained"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "gst",
+   "fieldtype": "Check",
+   "label": "GST Registration"
+  },
+  {
+   "default": "0",
+   "fieldname": "shops_and_establishment",
+   "fieldtype": "Check",
+   "label": "Shops & Establishment"
+  },
+  {
+   "fieldname": "other_registrations",
+   "fieldtype": "Text",
+   "label": "Other Registrations"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Compliance",
+ "name": "Incorporation Checklist",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

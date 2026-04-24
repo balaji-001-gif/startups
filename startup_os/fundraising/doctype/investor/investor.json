@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "creation": "2024-04-24 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "investor_name",
+  "investor_type",
+  "website",
+  "contact_email",
+  "column_break_4",
+  "total_investment",
+  "portfolio_count"
+ ],
+ "fields": [
+  {
+   "fieldname": "investor_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Investor Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "investor_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Investor Type",
+   "options": "Angel\nVC\nPE\nFamily Office\nCorporate\nOther"
+  },
+  {
+   "fieldname": "website",
+   "fieldtype": "Data",
+   "label": "Website"
+  },
+  {
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "label": "Contact Email"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_investment",
+   "fieldtype": "Currency",
+   "label": "Total Investment (to date)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "portfolio_count",
+   "fieldtype": "Int",
+   "label": "Portfolio Count",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Fundraising",
+ "name": "Investor",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
