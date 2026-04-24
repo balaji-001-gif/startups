@@ -1,0 +1,125 @@
+{
+ "actions": [],
+ "creation": "2024-04-24 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "investor",
+  "round_name",
+  "status",
+  "column_break_4",
+  "amount_inr",
+  "currency",
+  "fc_gpr_status",
+  "rbi_approval_required",
+  "rbi_approval_status",
+  "section_break_9",
+  "valuation_report",
+  "fdi_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "investor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Investor",
+   "options": "Investor"
+  },
+  {
+   "fieldname": "round_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Round Name",
+   "reqd": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Overall Status",
+   "options": "Pending\nIn Progress\nCompliant\nOverdue"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount_inr",
+   "fieldtype": "Currency",
+   "label": "Amount (INR)"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Data",
+   "label": "Foreign Currency"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "fc_gpr_status",
+   "fieldtype": "Select",
+   "label": "FC-GPR Filing Status",
+   "options": "Pending\nFiled\nAcknowledged"
+  },
+  {
+   "default": "0",
+   "fieldname": "rbi_approval_required",
+   "fieldtype": "Check",
+   "label": "RBI Approval Required"
+  },
+  {
+   "fieldname": "rbi_approval_status",
+   "fieldtype": "Select",
+   "label": "RBI Approval Status",
+   "options": "\nNot Required\nPending\nApproved\nRejected"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "valuation_report",
+   "fieldtype": "Attach",
+   "label": "Valuation Report (Mandatory for FDI)"
+  },
+  {
+   "fieldname": "fdi_notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Governance",
+ "name": "FEMA FDI Tracker",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

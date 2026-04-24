@@ -4,6 +4,8 @@ app_publisher = "Balaji"
 app_description = "The all-in-one Frappe/ERPNext custom application for Indian Startups"
 app_email = "support@startupos.in"
 app_license = "mit"
+app_version = "0.0.1"
+required_apps = ["frappe", "erpnext"]
 
 # Includes in <head>
 # ------------------
@@ -62,7 +64,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "startup_os.install.before_install"
-# after_install = "startup_os.install.after_install"
+after_install = "startup_os.install.after_install"
 
 # Uninstallation
 # --------------
@@ -104,13 +106,19 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-#	"*": {
-#		"on_update": "method",
-#		"on_cancel": "method",
-#		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	"Equity Transaction": {
+		"after_insert": "startup_os.cap_table.calculator.on_equity_transaction",
+		"on_update": "startup_os.cap_table.calculator.on_equity_transaction"
+	},
+	"ESOP Grant": {
+		"after_insert": "startup_os.cap_table.calculator.on_esop_grant_save",
+		"on_update": "startup_os.cap_table.calculator.on_esop_grant_save"
+	},
+	"Fundraising Opportunity": {
+		"on_update": "startup_os.fundraising.report_generator.on_opportunity_stage_change"
+	}
+}
 
 # Scheduled Tasks
 # ---------------

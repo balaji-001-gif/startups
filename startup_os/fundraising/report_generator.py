@@ -46,3 +46,25 @@ def create_update_draft(company_name):
 	
 	# Notify Founder
 	frappe.publish_realtime("investor_update_ready", {"company": company_name}, user="Administrator")
+
+def on_opportunity_stage_change(doc, method=None):
+	"""
+	Doc event: triggered when a Fundraising Opportunity stage changes.
+	Fires automated actions based on the new stage.
+	"""
+	if doc.stage == "Closed Won":
+		frappe.publish_realtime("deal_closed_won", {
+			"investor": doc.investor,
+			"amount": doc.amount,
+			"company": doc.company
+		})
+	elif doc.stage == "Term Sheet":
+		frappe.publish_realtime("term_sheet_received", {
+			"opportunity": doc.name,
+			"company": doc.company
+		})
+	elif doc.stage == "Due Diligence":
+		frappe.publish_realtime("due_diligence_started", {
+			"opportunity": doc.name,
+			"investor": doc.investor
+		})

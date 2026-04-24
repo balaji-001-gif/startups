@@ -1,5 +1,6 @@
 import frappe
-from frappe.utils import add_months, getdate, today
+from frappe.utils import add_months, getdate, today, flt
+
 
 def recompute_vesting_schedules():
 	"""
@@ -8,6 +9,47 @@ def recompute_vesting_schedules():
 	grants = frappe.get_all("ESOP Grant", fields=["name"])
 	for g in grants:
 		calculate_vesting_schedule(g.name)
+
+def on_equity_transaction(doc, method=None):
+	"""
+	Doc event: recompute shareholder ownership when an equity transaction is saved.
+	"""
+	recompute_shareholder_ownership(doc.company)
+
+def on_esop_grant_save(doc, method=None):
+	"""
+	Doc event: generate vesting schedule on ESOP Grant save if not already generated.
+	"""
+	if not doc.vesting_schedule:
+		calculate_vesting_schedule(doc.name)
+
+def recompute_shareholder_ownership(company):
+	"""
+	Recompute and save ownership percent for all shareholders of a company.
+	"""
+	shareholders = frappe.get_all("Shareholder", filters={"company": company}, fields=["name"])
+
+	# Aggregate all equity transactions
+	transaction_sums = {}
+	for sh in shareholders:
+		quantity = frappe.db.sql("""
+			SELECT
+				SUM(CASE WHEN transaction_type IN ('Issuance','Transfer') THEN quantity ELSE 0 END) -
+				SUM(CASE WHEN transaction_type IN ('Buyback','Cancellation') THEN quantity ELSE 0 END)
+				AS net_quantity
+			FROM `tabEquity Transaction`
+			WHERE shareholder = %s AND company = %s
+		""", (sh.name, company), as_dict=True)
+		transaction_sums[sh.name] = flt(quantity[0].net_quantity) if quantity and quantity[0].net_quantity else 0
+
+	total_shares = sum(transaction_sums.values())
+
+	for sh_name, net_qty in transaction_sums.items():
+		frappe.db.set_value("Shareholder", sh_name, {
+			"total_shares": net_qty,
+			"ownership_percent": round(net_qty / total_shares * 100, 4) if total_shares else 0
+		})
+
 
 def calculate_vesting_schedule(grant_name):
 	"""

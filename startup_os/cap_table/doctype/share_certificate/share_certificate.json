@@ -1,0 +1,113 @@
+{
+ "actions": [],
+ "creation": "2024-04-24 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "shareholder",
+  "certificate_number",
+  "share_type",
+  "from_number",
+  "to_number",
+  "column_break_4",
+  "quantity",
+  "issue_date",
+  "price_per_share",
+  "file"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shareholder",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Shareholder",
+   "options": "Shareholder",
+   "reqd": 1
+  },
+  {
+   "fieldname": "certificate_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Certificate Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "share_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Share Type",
+   "options": "Equity\nCCPS\nOCD\nWarrants"
+  },
+  {
+   "fieldname": "from_number",
+   "fieldtype": "Int",
+   "label": "From Share No."
+  },
+  {
+   "fieldname": "to_number",
+   "fieldtype": "Int",
+   "label": "To Share No."
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "label": "Quantity",
+   "reqd": 1
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issue Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "price_per_share",
+   "fieldtype": "Currency",
+   "label": "Price Per Share"
+  },
+  {
+   "fieldname": "file",
+   "fieldtype": "Attach",
+   "label": "Certificate PDF"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cap Table",
+ "name": "Share Certificate",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "issue_date",
+ "sort_order": "DESC",
+ "states": []
+}

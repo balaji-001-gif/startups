@@ -1,0 +1,52 @@
+{
+ "actions": [],
+ "creation": "2024-04-24 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "istable": 1,
+ "field_order": [
+  "category",
+  "budgeted_amount",
+  "actual_amount",
+  "variance"
+ ],
+ "fields": [
+  {
+   "fieldname": "category",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "budgeted_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Budgeted Amount"
+  },
+  {
+   "fieldname": "actual_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Actual Amount"
+  },
+  {
+   "fieldname": "variance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Variance",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2024-04-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Financial",
+ "name": "Budget Plan Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
