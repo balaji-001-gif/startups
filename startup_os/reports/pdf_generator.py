@@ -373,28 +373,29 @@ def generate_financial_projections(company, projection_months=24):
 	arpu = flt(ue.arpu) if ue else 0
 	churn = flt(ue.churn_rate) / 100 if ue else 0.02
 
-	# Get current customer count estimate
-	mrr = frappe.db.get_value("Unit Economics", {"company": company}, "mrr") or 0
-	customers = int(flt(mrr) / arpu) if arpu else 0
+	# Estimate starting customer base from current cash and burn rate
+	# If arpu is set, seed with a conservative estimate (burn / arpu), else 0
+	customers = int(monthly_burn / arpu) if (arpu and monthly_burn and arpu > 0) else 0
 
 	from frappe.utils import add_months
-	for month in range(1, projection_months + 1):
+	for month in range(1, int(projection_months) + 1):
 		month_date = add_months(today(), month)
-		customers_new = int(customers * 1.08)  # 8% monthly growth assumption
-		customers_churned = int(customers * churn)
-		customers = customers_new - customers_churned
+		# 8% MoM growth (conservative Seed-stage assumption)
+		new_customers = int(customers * 1.08) + 1
+		churned = int(customers * churn)
+		customers = max(new_customers - churned, 0)
 		mrr_proj = customers * arpu
-		cash -= monthly_burn
-		cash += mrr_proj
+		cash = cash - monthly_burn + mrr_proj
 
 		projections.append({
 			"month": month,
 			"date": formatdate(month_date, "MMM yyyy"),
 			"customers": customers,
 			"mrr": mrr_proj,
-			"cash_balance": max(cash, 0),
+			"cash_balance": cash,
 			"burn": monthly_burn,
 		})
+
 
 	data = frappe._dict({
 		"company": company,
