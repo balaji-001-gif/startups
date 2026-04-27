@@ -81,7 +81,7 @@ after_install = "startup_os.install.after_install"
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "startup_os.notifications.get_notification_config"
+notification_config = "startup_os.notifications.notification_config.get_notification_config"
 
 # Permissions
 # -----------
@@ -108,16 +108,25 @@ after_install = "startup_os.install.after_install"
 
 doc_events = {
 	"Equity Transaction": {
-		"after_insert": "startup_os.cap_table.calculator.on_equity_transaction",
-		"on_update": "startup_os.cap_table.calculator.on_equity_transaction"
+		"after_insert": [
+			"startup_os.cap_table.calculator.on_equity_transaction",
+			"startup_os.notifications.notifications.notify_equity_transaction",
+		],
+		"on_update": "startup_os.cap_table.calculator.on_equity_transaction",
 	},
 	"ESOP Grant": {
-		"after_insert": "startup_os.cap_table.calculator.on_esop_grant_save",
-		"on_update": "startup_os.cap_table.calculator.on_esop_grant_save"
+		"after_insert": [
+			"startup_os.cap_table.calculator.on_esop_grant_save",
+			"startup_os.notifications.notifications.notify_esop_grant",
+		],
+		"on_update": "startup_os.cap_table.calculator.on_esop_grant_save",
 	},
 	"Fundraising Opportunity": {
-		"on_update": "startup_os.fundraising.report_generator.on_opportunity_stage_change"
-	}
+		"on_update": "startup_os.fundraising.report_generator.on_opportunity_stage_change",
+	},
+	"DPIIT Application": {
+		"on_update": "startup_os.notifications.notifications.notify_dpiit_status_change",
+	},
 }
 
 # Scheduled Tasks

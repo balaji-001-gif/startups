@@ -1,5 +1,9 @@
 import frappe
 from frappe.utils import add_days, today, getdate
+from startup_os.notifications.notifications import (
+	notify_compliance_deadline,
+	notify_compliance_score_drop,
+)
 
 def check_upcoming_deadlines():
 	"""
@@ -13,7 +17,7 @@ def check_upcoming_deadlines():
 	for filing in upcoming_filings:
 		days_left = (getdate(filing.due_date) - getdate(today())).days
 		if days_left in [30, 7, 1]:
-			send_compliance_alert(filing, days_left)
+			notify_compliance_deadline(filing, days_left)
 
 def send_compliance_alert(filing, days_left):
 	"""
@@ -79,4 +83,10 @@ def calculate_company_score(company_name):
 	score_doc.score = max(score, 0)
 	score_doc.last_computed = frappe.utils.now()
 	score_doc.score_breakdown = frappe.as_json(deductions)
+
+	# Notify on significant score drop
+	old_score = getattr(score_doc, '_doc_before_save', None)
+	if old_score and hasattr(old_score, 'score'):
+		notify_compliance_score_drop(company_name, old_score.score, max(score, 0))
+
 	score_doc.save(ignore_permissions=True)

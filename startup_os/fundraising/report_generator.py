@@ -1,5 +1,9 @@
 import frappe
 from frappe.utils import today, add_months
+from startup_os.notifications.notifications import (
+	notify_investor_update_due,
+	notify_fundraising_stage_change,
+)
 
 def prompt_investor_update():
 	"""
@@ -43,8 +47,11 @@ def create_update_draft(company_name):
 	doc.update_text = update_text
 	doc.status = "Draft"
 	doc.save(ignore_permissions=True)
-	
-	# Notify Founder
+
+	# Notify via email + in-app
+	notify_investor_update_due({"investor_name": company_name})
+
+	# Real-time desk alert
 	frappe.publish_realtime("investor_update_ready", {"company": company_name}, user="Administrator")
 
 def on_opportunity_stage_change(doc, method=None):
@@ -52,19 +59,23 @@ def on_opportunity_stage_change(doc, method=None):
 	Doc event: triggered when a Fundraising Opportunity stage changes.
 	Fires automated actions based on the new stage.
 	"""
-	if doc.stage == "Closed Won":
+	prev_stage = doc.get_doc_before_save()
+	prev_status = prev_stage.status if prev_stage else ""
+	notify_fundraising_stage_change(doc, prev_status)
+
+	if doc.status == "Closed":
 		frappe.publish_realtime("deal_closed_won", {
-			"investor": doc.investor,
-			"amount": doc.amount,
-			"company": doc.company
+			"investor": doc.get("investor_name"),
+			"amount": doc.get("ticket_size"),
+			"company": doc.get("company")
 		})
-	elif doc.stage == "Term Sheet":
+	elif doc.status == "Term Sheet":
 		frappe.publish_realtime("term_sheet_received", {
 			"opportunity": doc.name,
-			"company": doc.company
+			"company": doc.get("company")
 		})
-	elif doc.stage == "Due Diligence":
+	elif doc.status == "Due Diligence":
 		frappe.publish_realtime("due_diligence_started", {
 			"opportunity": doc.name,
-			"investor": doc.investor
+			"investor": doc.get("investor_name")
 		})

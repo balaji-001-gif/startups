@@ -1,5 +1,6 @@
 import frappe
 from frappe.utils import flt, now_datetime, get_last_day, add_months
+from startup_os.notifications.notifications import notify_low_runway
 
 def update_all_runway_models():
 	"""
@@ -67,6 +68,9 @@ def update_runway_model(company_name):
 	doc.runway_pessimistic = runway_pess
 	doc.last_updated = frappe.utils.now()
 	doc.save(ignore_permissions=True)
+
+	# Alert founders if runway is dangerously low
+	notify_low_runway(company_name, runway_base, monthly_burn)
 
 def compute_unit_economics():
 	"""
